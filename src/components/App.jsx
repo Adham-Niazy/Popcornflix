@@ -9,13 +9,17 @@ import {
   Profile,
 } from '../pages';
 import { Navbar } from '.';
+import useStyles from './styles';
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div>
+    <div className={classes.root}>
       <CssBaseline />
       <Navbar />
-      <main>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
         <Routes>
           <Route path="/" element={<MoviesList />} />
           <Route path="/movie/:id" element={<MovieInformation />} />
