@@ -1,18 +1,21 @@
 import React from 'react';
-import { Divider, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
+import { Box, CircularProgress, Divider, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 
 import useStyles from './styles';
+import genreIcons from '../../assets/genres';
 import darkLogo from '../../assets/Logo/Popcornflix.png';
 import LightLogo from '../../assets/Logo/Popcornflix (1).png';
+import { useGetGenresQuery } from '../../services/TMDB';
 
 // Mock Data
-import { categories, mockCategories } from './mockData';
+import { categories } from './staticData';
 
 function Sidebar() {
   const classes = useStyles();
   const theme = useTheme();
+  const { data, isFetching } = useGetGenresQuery();
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -28,9 +31,9 @@ function Sidebar() {
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
             <ListItem onClick={() => { }} button>
-              {/* <ListItemIcon>
-                <img src={darkLogo} className={classes.genreImages} height={30} />
-              </ListItemIcon> */}
+              <ListItemIcon>
+                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
+              </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
           </Link>
@@ -39,16 +42,20 @@ function Sidebar() {
       <Divider />
       <List>
         <ListSubheader>Genres</ListSubheader>
-        {mockCategories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to="/">
+        {isFetching ? (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress />
+          </Box>
+        ) : (data?.genres?.map(({ id, name }) => (
+          <Link key={id} className={classes.links} to="/">
             <ListItem onClick={() => { }} button>
-              {/* <ListItemIcon>
-                <img src={darkLogo} className={classes.genreImages} height={30} />
-              </ListItemIcon> */}
-              <ListItemText primary={label} />
+              <ListItemIcon>
+                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
+              </ListItemIcon>
+              <ListItemText primary={name} />
             </ListItem>
           </Link>
-        ))}
+        )))}
       </List>
     </>
   );

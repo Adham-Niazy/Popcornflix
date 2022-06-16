@@ -11,9 +11,13 @@ export const TMDBApi = createApi({
     getMovies: builder.query({
       query: () => `movie/popular?page=${page}&api_key=${tmdbAPIKey}`,
     }),
+    getGenres: builder.query({
+      query: () => `genre/movie/list?api_key=${tmdbAPIKey}`,
+    }),
   }),
 });
 
 export const {
   useGetMoviesQuery,
+  useGetGenresQuery,
 } = TMDBApi;
