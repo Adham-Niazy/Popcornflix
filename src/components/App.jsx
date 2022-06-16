@@ -6,10 +6,10 @@ import { useTheme } from '@mui/material/styles';
 import {
   Actors,
   MovieInformation,
-  MoviesList,
+  Movies,
   Profile,
 } from '../pages';
-import { Navbar } from '.';
+import Navbar from './Navbar';
 import useStyles from './styles';
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Routes>
-          <Route path="/" element={<MoviesList />} />
+          <Route path="/" element={<Movies />} />
           <Route path="/movie/:id" element={<MovieInformation />} />
           <Route path="/actors/:id" element={<Actors />} />
           <Route path="/profile/:id" element={<Profile />} />
