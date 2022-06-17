@@ -2,12 +2,14 @@ import React from 'react';
 import { Box, CircularProgress, Divider, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
+import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
 import genreIcons from '../../assets/genres';
 import darkLogo from '../../assets/Logo/Popcornflix.png';
 import LightLogo from '../../assets/Logo/Popcornflix (1).png';
 import { useGetGenresQuery } from '../../services/TMDB';
+import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 // Mock Data
 import { categories } from './staticData';
@@ -16,6 +18,7 @@ function Sidebar() {
   const classes = useStyles();
   const theme = useTheme();
   const { data, isFetching } = useGetGenresQuery();
+  const dispatch = useDispatch();
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -30,7 +33,7 @@ function Sidebar() {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItem onClick={() => { }} button>
+            <ListItem onClick={() => { dispatch(selectGenreOrCategory(value)); }} button>
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
@@ -48,7 +51,7 @@ function Sidebar() {
           </Box>
         ) : (data?.genres?.map(({ id, name }) => (
           <Link key={id} className={classes.links} to="/">
-            <ListItem onClick={() => { }} button>
+            <ListItem onClick={() => { dispatch(selectGenreOrCategory(id)); }} button>
               <ListItemIcon>
                 <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
