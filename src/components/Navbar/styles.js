@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     marginLeft: '240px',
     [theme.breakpoints.down('sm')]: {
+      height: '90px',
       marginLeft: 0,
       flexWrap: 'wrap',
     },
