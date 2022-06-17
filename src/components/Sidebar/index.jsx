@@ -14,7 +14,7 @@ import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 // Mock Data
 import { categories } from './staticData';
 
-function Sidebar() {
+function Sidebar({ setMobileOpen }) {
   const classes = useStyles();
   const theme = useTheme();
   const { data, isFetching } = useGetGenresQuery();
@@ -22,7 +22,7 @@ function Sidebar() {
   const dispatch = useDispatch();
   return (
     <>
-      <Link to="/" className={classes.imageLink}>
+      <Link to="/" className={classes.imageLink} onClick={() => setMobileOpen(false)}>
         <img
           className={classes.image}
           src={theme.palette.mode === 'light' ? LightLogo : darkLogo}
@@ -34,7 +34,14 @@ function Sidebar() {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItem onClick={() => { dispatch(selectGenreOrCategory(value)); }} button selected={genreIdOrCategoryName === value}>
+            <ListItem
+              onClick={() => {
+                dispatch(selectGenreOrCategory(value));
+                setMobileOpen(false);
+              }}
+              button
+              selected={genreIdOrCategoryName === value}
+            >
               <ListItemIcon>
                 <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>
@@ -52,7 +59,14 @@ function Sidebar() {
           </Box>
         ) : (data?.genres?.map(({ id, name }) => (
           <Link key={id} className={classes.links} to="/">
-            <ListItem onClick={() => { dispatch(selectGenreOrCategory(id)); }} button selected={genreIdOrCategoryName === id}>
+            <ListItem
+              onClick={() => {
+                dispatch(selectGenreOrCategory(id));
+                setMobileOpen(false);
+              }}
+              button
+              selected={genreIdOrCategoryName === id}
+            >
               <ListItemIcon>
                 <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
               </ListItemIcon>

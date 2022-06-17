@@ -3,12 +3,17 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { useGetMoviesQuery } from '../../services/TMDB';
-import { MoviesList } from '../../components';
+import MoviesList from '../../components/MoviesList';
 
 function Movies() {
   const [page, setPage] = useState(1);
-  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
-  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page });
+  const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
+  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
+  const temp = false;
+  if (temp) {
+    setPage(2);
+  }
+
   // Loading State
   if (isFetching) {
     return (
@@ -21,7 +26,7 @@ function Movies() {
   if (!data.results.length) {
     return (
       <Box display="flex" alignItems="center" mt="20px">
-        <Typography variant="h4"> No movies that match that name. <br /> Please search for something else. </Typography>
+        <Typography variant="h4"> No movies that match that name..🙄🔎</Typography>
       </Box>
     );
   }

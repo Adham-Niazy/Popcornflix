@@ -1,2 +1,3 @@
 export { default as Sidebar } from './Sidebar';
-export { default as MoviesList } from './MoviesList';
+export { default as Search } from './Search';
+export { default as Movie } from './Movie';
