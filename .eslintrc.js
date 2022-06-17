@@ -76,5 +76,6 @@ module.exports = {
         ],
       },
     ],
+    'no-param-reassign': [2, { state: false }],
   },
 };
