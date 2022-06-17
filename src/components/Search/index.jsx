@@ -23,7 +23,10 @@ function Search() {
       </SearchIconWrapper>
       <StyledInputBase
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          if (e.target.value === '') dispatch(searchMovie(''));
+          setQuery(e.target.value);
+        }}
         onKeyDown={handleKeyPress}
         placeholder="Search Movies"
         inputProps={{ 'aria-label': 'search' }}
