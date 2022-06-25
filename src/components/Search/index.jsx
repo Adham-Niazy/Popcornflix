@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-// import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SearchComponent, SearchIconWrapper, StyledInputBase } from './styles';
 import { searchMovie } from '../../features/currentGenreOrCategory';
@@ -9,9 +9,12 @@ import { searchMovie } from '../../features/currentGenreOrCategory';
 function Search() {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && query !== '') {
+      if (location.pathname !== '/') navigate('/');
       dispatch(searchMovie(query));
     }
   };

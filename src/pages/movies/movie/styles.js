@@ -55,7 +55,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
     },
   },
