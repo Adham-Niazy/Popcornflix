@@ -10,6 +10,7 @@ import useStyles from './styles';
 import MovieDetails from './details';
 import TopCast from './topCast';
 import ActionsGroup from './actionsGroup';
+import Recommendation from './recommendation';
 
 function MovieInformation() {
   const classes = useStyles();
@@ -43,6 +44,9 @@ function MovieInformation() {
         <TopCast data={data} />
         <ActionsGroup data={data} />
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Recommendation id={id} />
+      </Box>
     </Grid>
   );
 }
