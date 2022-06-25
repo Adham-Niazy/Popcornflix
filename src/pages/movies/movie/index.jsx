@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Box, CircularProgress } from '@mui/material';
-
 import { Link, useParams } from 'react-router-dom';
 // import axios from 'axios';
 
 import { useGetMovieQuery } from '../../../services/TMDB';
-
 import useStyles from './styles';
 import MovieDetails from './details';
 import TopCast from './topCast';
 import ActionsGroup from './actionsGroup';
 import Recommendation from './recommendation';
+import Trailer from './trailer';
 
 function MovieInformation() {
   const classes = useStyles();
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
+  const [open, setOpen] = useState(false);
 
   if (isFetching) {
     return (
@@ -42,11 +42,12 @@ function MovieInformation() {
       <Grid item container direction="column" lg={7}>
         <MovieDetails data={data} />
         <TopCast data={data} />
-        <ActionsGroup data={data} />
+        <ActionsGroup data={data} setOpen={setOpen} />
       </Grid>
       <Box marginTop="5rem" width="100%">
         <Recommendation id={id} />
       </Box>
+      <Trailer data={data} open={open} setOpen={setOpen} />
     </Grid>
   );
 }

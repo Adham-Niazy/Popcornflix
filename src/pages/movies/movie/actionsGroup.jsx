@@ -4,7 +4,7 @@ import { Movie as MovieIcon, Theaters, Language, PlusOne, Favorite, FavoriteBord
 
 import useStyles from './styles';
 
-function ActionsGroup({ data }) {
+function ActionsGroup({ data, setOpen }) {
   const classes = useStyles();
   const isMovieFavorited = true;
   const isMovieWatchlisted = true;
@@ -29,15 +29,17 @@ function ActionsGroup({ data }) {
                 IMDB
               </Button>
             )}
-            <Button onClick={() => { }} href="#" endIcon={<Theaters />}>
-              Trailer
-            </Button>
+            {data?.videos?.results?.length && (
+              <Button onClick={() => setOpen(true)} endIcon={<Theaters />}>
+                Trailer
+              </Button>
+            )}
           </ButtonGroup>
         </Grid>
         <Grid item xs={12} justifyContent="end" className={classes.buttonsContainer}>
           <ButtonGroup size="medium" variant="outlined">
-            <Button onClick={addToFavorite} endIcon={!isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}>
-              {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
+            <Button onClick={addToFavorite}>
+              {!isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}
             </Button>
             <Button onClick={addToWatchlist} endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}>
               {isMovieWatchlisted ? 'Watchlisted' : 'Watchlist'}
