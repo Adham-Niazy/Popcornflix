@@ -44,7 +44,7 @@ function Actors() {
           </Box>
         </Grid>
       </Grid>
-      <ActorMovies id={id} page={1} />
+      <ActorMovies id={id} />
     </>
   );
 }

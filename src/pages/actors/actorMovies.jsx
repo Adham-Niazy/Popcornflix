@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
+
 import { useGetMoviesByActorQuery } from '../../services/TMDB';
 import MoviesList from '../../components/MoviesList';
+import { Pagination } from '../../components';
 
-function ActorMovies({ id, page }) {
+function ActorMovies({ id }) {
+  const [page, setPage] = useState(1);
   const { data, isFetching } = useGetMoviesByActorQuery({ id, page });
   if (isFetching) {
     return (
@@ -19,6 +22,7 @@ function ActorMovies({ id, page }) {
           <Typography variant="h2" gutterBottom align="center">Movies</Typography>
         </Box>
         <MoviesList movies={data} numberOfMovies={12} />
+        <Pagination page={page} setPage={setPage} totalPages={data?.total_pages} />
       </>
     )
   );

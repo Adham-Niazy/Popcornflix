@@ -37,6 +37,9 @@ function Navbar() {
     loginUser();
   }, [loginUser]);
 
+  const userProfileImage = `https://www.themoviedb.org/t/p/w64_and_h64_face${user?.avatar?.tmdb?.avatar_path}`;
+  const tempProfileImage = 'https://media.istockphoto.com/vectors/default-avatar-photo-placeholder-icon-grey-profile-picture-business-vector-id1327592449?k=20&m=1327592449&s=612x612&w=0&h=6yFQPGaxmMLgoEKibnVSRIEnnBgelAeIAf8FqpLBNww=';
+
   return (
     <>
       <AppBar position="fixed">
@@ -68,7 +71,7 @@ function Navbar() {
             ) : (
               <Button color="inherit" component={Link} to={`/profile/${user.id}`} className={classes.linkButton} onClick={() => { }}>
                 {!isMobile && <>My Movies &nbsp;</>}
-                <Avatar style={{ width: 30, height: 30 }} alt="Profile" src="https://avatarairlines.com/wp-content/uploads/2020/05/Male-placeholder.jpeg" />
+                <Avatar style={{ width: 30, height: 30 }} alt="Profile" src={user?.avatar?.tmdb?.avatar_path ? userProfileImage : tempProfileImage} />
               </Button>
             )}
           </div>
