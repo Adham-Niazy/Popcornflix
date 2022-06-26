@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography, useMediaQuery } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { useGetMoviesQuery } from '../../services/TMDB';
 import MoviesList from '../../components/MoviesList';
 
 function Movies() {
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const { genreIdOrCategoryName, searchQuery } = useSelector((state) => state.currentGenreOrCategory);
   const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
-  const temp = false;
-  if (temp) {
-    setPage(2);
-  }
+  const lg = useMediaQuery((theme) => theme.breakpoints.only('lg'));
+  const numberOfMovies = lg ? 16 : 18;
 
   // Loading State
   if (isFetching) {
@@ -34,7 +32,7 @@ function Movies() {
   if (error) return 'An error has occured.';
   return (
     <div>
-      <MoviesList movies={data} />
+      <MoviesList movies={data} numberOfMovies={numberOfMovies} />
     </div>
   );
 }
