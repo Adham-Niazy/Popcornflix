@@ -10,4 +10,5 @@ export default configureStore({
     currentGenreOrCategory: genreOrCategoryReducer,
     user: authReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(TMDBApi.middleware),
 });
