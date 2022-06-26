@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CssBaseline } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -11,10 +11,13 @@ import {
 } from '../pages';
 import Navbar from './Navbar';
 import useStyles from './styles';
+import useAlan from './Alan-Ai/Alan';
 
 function App() {
   const classes = useStyles();
   const theme = useTheme();
+  const alanBtnContainer = useRef();
+  useAlan();
 
   function getFavicon() {
     return document.getElementById('favicon');
@@ -40,6 +43,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </main>
+      <div ref={alanBtnContainer} />
     </div>
   );
 }
