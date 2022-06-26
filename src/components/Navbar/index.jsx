@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import useStyles from './styles';
 import { Sidebar, Search } from '..';
 import { fetchToken, createSessionId, moviesApi } from '../../utils';
 import { setUserData } from '../../features/auth';
+import { ColorModeContext } from '../../utils/ToggleColorMode';
 
 function Navbar() {
   const { user, isAuthenticated } = useSelector((state) => state.user);
@@ -19,6 +20,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const REQUEST_TOKEN = localStorage.getItem('request_token');
   const SESSION_ID = localStorage.getItem('session_id');
+  const colorMode = useContext(ColorModeContext);
 
   const loginUser = useCallback(async () => {
     if (REQUEST_TOKEN) {
@@ -58,7 +60,7 @@ function Navbar() {
           <IconButton
             color="inherit"
             sx={{ ml: 1 }}
-            onClick={() => { }}
+            onClick={colorMode.toggleColorMode}
           >
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>

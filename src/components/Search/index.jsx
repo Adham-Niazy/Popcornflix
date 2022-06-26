@@ -19,7 +19,7 @@ function Search() {
     }
   };
 
-  if (location.pathname !== '/') return null;
+  if (location.pathname !== '/' && location.pathname !== '/approved') return null;
 
   return (
     <SearchComponent>

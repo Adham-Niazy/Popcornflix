@@ -43,7 +43,7 @@ function Sidebar({ setMobileOpen }) {
               selected={genreIdOrCategoryName === value}
             >
               <ListItemIcon>
-                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
+                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImage} height={30} />
               </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
@@ -68,7 +68,7 @@ function Sidebar({ setMobileOpen }) {
               selected={genreIdOrCategoryName === id}
             >
               <ListItemIcon>
-                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
+                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} />
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
