@@ -14,9 +14,9 @@ function Profile() {
   };
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: '1rem' }}>
-        <Typography variant="h4">My Profile - {user.username}</Typography>
-        <Button variant="outlined" color="error" onClick={logout}>
+      <Box display="flex" flexWrap="wrap" justifyContent="space-between" alignItems="center">
+        <Typography variant="h4" style={{ marginBottom: '1rem' }}>My Profile - {user.username}</Typography>
+        <Button variant="outlined" color="error" onClick={logout} style={{ marginBottom: '1rem' }}>
           Logout &nbsp; <ExitToApp />
         </Button>
       </Box>

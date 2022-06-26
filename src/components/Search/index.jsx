@@ -19,6 +19,8 @@ function Search() {
     }
   };
 
+  if (location.pathname !== '/') return null;
+
   return (
     <SearchComponent>
       <SearchIconWrapper>
