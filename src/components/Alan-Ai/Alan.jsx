@@ -40,7 +40,7 @@ function useAlan() {
             break;
           case 'logout':
             localStorage.clear();
-            navigate('/');
+            window.location.href = '/';
             break;
           default: break;
         }
